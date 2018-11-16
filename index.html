@@ -19,16 +19,12 @@
       let target = document.getElementById('submit');
       target.addEventListener("click", sendForm, false);
 
+      let form = document.forms.sample;
+
       // set API Path here
       let url  = '';
 
-      // Use URLSearchParams
-      let params = new URLSearchParams();
-      params.append('data[name]', 'sample');
-      params.append('data[email]', 'sample@gmail.com');
-
       // Use FormData
-      //let form = document.forms.sample;
       // @see https://stackoverflow.com/questions/7542586/new-formdata-application-x-www-form-urlencoded
       //function urlencodeFormData(fd){
       //  var s = '';
@@ -40,16 +36,27 @@
       //  }
       //  return s;
       //}
+      // End Use FormData
 
       function sendForm() {
+        // Use URLSearchParams
+        let params = new URLSearchParams();
+        params.append('data[name]', document.sample.elements['data[name]'].value);
+        params.append('data[email]', document.sample.elements['data[email]'].value);
+        // End Use URLSearchParams
 
         fetch(url, {
           method: 'POST',
+          // Use FormData
           //headers: {
           //  "Content-Type": "application/x-www-form-urlencoded"
           //},
           //body: urlencodeFormData(new FormData(form))
+          // End Use FormData
+
+          // Use URLSearchParams
           body: params
+          // End Use URLSearchParams
         }).then((response) => {
           console.log(response);
         }).catch((err) => {
